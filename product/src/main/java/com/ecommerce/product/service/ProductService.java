@@ -81,4 +81,11 @@ public class ProductService {
         return productRepository.findByIdAndActiveTrue(Long.valueOf(id))
                 .map(this::mapToProductResponse);
     }
+
+    public void decreaseProductStock(Long id, int quantity) {
+        productRepository.findByIdAndActiveTrue(id).ifPresent(product -> {
+            product.setStockQuantity(product.getStockQuantity() - quantity);
+            productRepository.save(product);
+        });
+    }
 }

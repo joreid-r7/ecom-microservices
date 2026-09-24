@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.order.client.ProductServiceClient;
 import com.ecommerce.order.dto.OrderItemDTO;
 import com.ecommerce.order.dto.OrderResponse;
 import com.ecommerce.order.model.CartItem;
@@ -21,6 +22,7 @@ public class OrderService {
 
     private final CartService cartService;
     private final OrderRepository orderRepository;
+    private final ProductServiceClient productServiceClient;
 
     public Optional<OrderResponse> createOrder(String userId){
 
@@ -61,6 +63,8 @@ public class OrderService {
         Order savedOrder = orderRepository.save(order);
 
         // Clear the cart
+        cartItems.forEach(item ->
+                productServiceClient.decreaseProductStock(item.getProductId(), item.getQuantity()));
         cartService.clearCart(userId);
 
         return Optional.of(mapToOrderResponse(savedOrder));

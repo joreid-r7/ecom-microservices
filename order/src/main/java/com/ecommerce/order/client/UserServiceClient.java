@@ -4,21 +4,15 @@
  * work including confidential and proprietary information of Rapid7.
  **************************************************************************/
 package com.ecommerce.order.client;
-
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
-import org.springframework.web.service.annotation.PutExchange;
 
-import com.ecommerce.order.dto.ProductResponse;
+import com.ecommerce.order.dto.UserResponse;
 
 @HttpExchange
-public interface ProductServiceClient {
+public interface UserServiceClient {
 
-    @GetExchange("/api/products/{id}")
-    ProductResponse getProductDetails(@PathVariable String id);
-
-    @PutExchange("/api/products/{id}/decrease-stock")
-    void decreaseProductStock(@PathVariable String id, @RequestParam int quantity);
+    @GetExchange("/api/users/{id}")
+    UserResponse getUserDetails(@PathVariable String id);
 }

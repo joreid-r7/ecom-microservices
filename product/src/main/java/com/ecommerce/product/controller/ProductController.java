@@ -54,6 +54,12 @@ public class ProductController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}/decrease-stock")
+    public ResponseEntity<Void> decreaseProductStock(@PathVariable Long id, @RequestParam int quantity){
+        productService.decreaseProductStock(id, quantity);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
         boolean deleted = productService.deleteProduct(id);

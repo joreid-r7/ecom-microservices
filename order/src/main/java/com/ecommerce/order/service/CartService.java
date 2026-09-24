@@ -30,10 +30,12 @@ public class CartService {
         if (productResponse == null || productResponse.getStockQuantity() < request.getQuantity())
             return false;
 
+        // Validate user exists
         UserResponse userResponse = userServiceClient.getUserDetails(userId);
         if (userResponse == null)
             return false;
 
+        // Update an existing cart item
         CartItem existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, request.getProductId());
         if (existingCartItem != null) {
             if (existingCartItem.getQuantity() + request.getQuantity() > productServiceClient.

@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ecommerce.product.model.Product;
-import aj.org.objectweb.asm.commons.Remapper;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
